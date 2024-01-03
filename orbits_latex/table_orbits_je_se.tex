@@ -1,0 +1,495 @@
+\documentclass[reqno, 11pt]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{epsfig,amsmath, amsthm ,amsfonts,latexsym,stmaryrd, amssymb}
+\usepackage[abs]{overpic}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[linktocpage=true]{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[subfigure]{margin=0pt, parskip=0pt, hangindent=0pt, indention=0pt, labelformat=parens, labelfont=rm} 
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage{simpler-wick}
+\usetikzlibrary{shapes,arrows}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{marginnote}
+\usepackage[all,cmtip]{xy}
+\usepackage[backend=biber, maxnames=4, style=alphabetic]{biblatex}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+
+%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\addbibresource{references.bib}
+\setlength\bibitemsep{0.5\baselineskip}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+  colorlinks,
+  citecolor=teal,
+  linkcolor=purple,
+  urlcolor=teal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem*{thmu}{Theorem}
+\newtheorem{theorem}{Theorem}
+\renewcommand{\thetheorem}{\Alph{theorem}}
+\newtheorem*{notation}{Notation}
+\newtheorem*{Conventions}{Conventions}
+\newtheorem{dummy}{anything}[section]
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem{lemma}[dummy]{Lemma}
+\newtheorem*{lem}{Lemma}
+\newtheorem{question}[dummy]{Question}
+\newtheorem*{quo}{Question}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem*{prop}{Proposition}
+\newtheorem{corollary}[dummy]{Corollary}
+\newtheorem{conjecture}[dummy]{Conjecture}
+\newtheorem*{conj}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[dummy]{Definition}
+\newtheorem*{defn}{Definition}
+\newtheorem{example}[dummy]{Example}
+\newtheorem{nonexample}[dummy]{Non{--}Example}
+\newtheorem{remark}[dummy]{Remark}
+\newtheorem*{rem}{Remark}
+\theoremstyle{remark}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textwidth 6in \textheight 7.6in \evensidemargin .25in \oddsidemargin .25in 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\op}{\operatorname}
+\newcommand{\del}{\partial}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Int}{\rm{Int}}
+\newcommand{\A}{\mathscr{A}}
+\newcommand{\q}{\mathbf{q}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Es}{\mathfrak{S}}
+\newcommand{\s}{\sigma}
+\newcommand{\al}{\alpha}
+\newcommand{\bR}{\mathbb R}
+\newcommand{\tr}{\textrm}
+\newcommand{\w}{\omega}
+\renewcommand{\t}{\mathbf t}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\bdy{\partial}
+\def\cp{\hbox{${\Bbb C} P^2$}}
+\def\cpb{\hbox{$\overline{{\Bbb C}P^2}$}}
+\def\v{\vskip.12in}
+\def\dfn#1{{\em #1}}
+\def\R{\mathbb{R}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\N{\mathbb{N}}
+\def\HH{\mathrm{HH}}
+
+\DeclareFontFamily{U}{mathx}{}
+\DeclareFontShape{U}{mathx}{m}{n}{<-> mathx10}{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\p}{\partial}
+\newcommand{\K}{\mathbb{K}}
+
+\newenvironment{nouppercase}{%
+  \let\uppercase\relax%
+  \renewcommand{\uppercasenonmath}[1]{}}{}
+
+\pagestyle{plain}
+
+\begin{document}
+
+
+\title{Tables for the Jupiter--Europa and Saturn--Enceladus systems}
+
+\author{}
+
+
+%\date{\today}
+
+%\subjclass[2020]{Primary 57R17; Secondary 53C15, 32Q65, 37D05}
+
+%57R17 Symplectic and contact topology
+%53C15 General geometric structures on manifolds (almost complex, almost product structures, etc.)
+%32Q65 Pseudoholomorphic curves
+%37D05 Dynamical systems with hyperbolic orbits and sets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% BEGIN PAPER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+Tables for some periodic orbits in the Jupiter-Europa system and the Saturn-Enceladus system. These tables supplement the paper ``Symplectic geometry and space mission design, On the Jupiter--Europa and Saturn--Enceladus systems''.
+\end{abstract}
+
+
+\begin{nouppercase}
+\maketitle    
+\end{nouppercase}
+
+
+
+
+
+\section{Tables}\label{app:tables}
+
+In this appendix, we give tables with the data associated to the various families we have considered.
+
+\begin{table}[htbp]\fontsize{10}{10}\selectfont \centering
+\caption{Data for $g$-$LPO1$ branch for JE.}
+\begin{tabular}{c|c|c|c|c|c}
+\hline 
+	$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}^p$ / $\mu_{CZ}^s$ / $\mu_{CZ}$\\
+	\hline 3.01142113 & 1.0226290 & 0.10284894 & 0.13999 & $(+/-)$ $\varphi_p = 0.137$, $(+/-)$ $\varphi_s = 0.142$ & 3 / 3 / 6\\
+	3.00383366 & 1.00797270 & 0.05073828 & 1.17402 & $(+/-)$ $\varphi_p = 0.332$, $(+/-)$ $\varphi_s = 1.290$ & 3 / 3 / 6 \\
+	3.00372747 & 1.00538715 & 0.07480305 & 1.33771 & $(+/-)$ $\varphi_p = 0.556$, $(+/-)$ $\varphi_s = 1.572$ & 3 / 3 / 6 \\
+	3.00365597 & 1.00378076 & 0.09779235 & 1.59835 & $(+/-)$ $\varphi_p = 1.068$, $(+/-)$ $\varphi_s = 2.089$ & 3 / 3 / 6 \\
+	3.00360358 & 1.00244635 & 0.12945606 & 2.08332 & $(+/-)$ $\varphi_p = 1.845$, $(+/-)$ $\varphi_s = 3.136$ & 3 / 3 / 6 \\
+	3.00360326 & 1.00243628 & 0.12977936 & 2.08832 & $(+/-)$ $\varphi_p = 1.858$, $(+/+)$ $\lambda_s = -1.03$ & 3 / 3 / 6 \\
+	3.00360049 & 1.00234732 & 0.13271728 & 2.13332 & $(+/-)$ $\varphi_p = 1.987$, $(+/+)$ $\lambda_s = -1.05$ & 3 / 3 / 6 \\
+	3.00359960 & 1.00231829 & 0.13370950 & 2.14831 & $(+/-)$ $\varphi_p = 2.037$, $(-/+)$ $\varphi_s = 3.166$ & 3 / 3 / 6 \\
+	3.00358255 & 1.00180287 & 0.15481646 & 2.43323 & $(+/+)$ $\lambda_p = -4.39$, $(-/+)$ $\varphi_s = 3.796$ & 3 / 3 / 6 \\
+	3.00343430 & 1.00043030 & 0.32769866 & 3.13136 & $(+/+)$ $\lambda_p = -129$, $(-/+)$ $\varphi_s = 5.223$ & 3 / 3 / 6
+\end{tabular}
+\label{data_g_lpo1}
+\end{table}
+
+\begin{table}[h]\fontsize{10}{10}\selectfont \centering
+\caption{Data for $DPO$ branch for JE.}
+	\begin{tabular}{c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}^p$ / $\mu_{CZ}^s$ / $\mu_{CZ}$\\
+		\hline 3.00374605 & 1.00900895 & 0.04460670 & 1.25362 & $(-/-)$ $\lambda_p = 1.29$, $(+/-)$ $\varphi_s = 1.385$ & 2 / 3 / 5\\
+		3.00358658 & 1.00884026 & 0.04739922 & 1.41448 & $(-/-)$ $\lambda_p = 2.23$, $(+/-)$ $\varphi_s = 1.565$ & 2 / 3 / 5\\
+		3.00356924 & 1.00889026 & 0.04727261 & 1.43426 & $(-/-)$ $\lambda_p = 2.36$, $(+/-)$ $\varphi_s = 1.589$ & 2 / 3 / 5\\
+		3.00340053 & 1.00928559 & 0.04673515 & 1.64653 & $(-/-)$ $\lambda_p = 4.29$, $(+/-)$ $\varphi_s = 1.829$ & 2 / 3 / 5 \\
+        3.00323697 & 1.00958786 & 0.04684116 & 1.88433 & $(-/-)$ $\lambda_p = 8.52$, $(+/-)$ $\varphi_s = 2.094$ & 2 / 3 / 5 \\
+		3.00257321 & 1.00913170 & 0.05562606 & 2.88768 & $(-/-)$ $\lambda_p = 136$, $(+/-)$ $\varphi_s = 3.092$ & 2 / 3 / 5 \\
+		3.00237147 & 1.00863170 & 0.05990199 & 3.16288 & $(-/-)$ $\lambda_p = 246$, $(-/+)$ $\varphi_s = 3.334$ & 2 / 3 / 5 \\
+		3.00109352 & 1.00470170 & 0.09778837 & 5.12979 & $(-/-)$ $\lambda_p = 2485$, $(-/+)$ $\varphi_s = 6.161$ & 2 / 3 / 5 \\
+		3.00109192 & 1.00469670 & 0.09785369 & 5.13303 & $(-/-)$ $\lambda_p = 2570$, $(+/+)$ $\lambda_s = 1.027$ & 2 / 4 / 6 \\
+		3.00107109 & 1.00463170 & 0.09871030 & 5.17546 & $(-/-)$ $\lambda_p = 3062$, $(+/+)$ $\lambda_s = 1.540$ & 2 / 4 / 6 
+	\end{tabular}
+	\label{data_dpo}
+\end{table}
+
+\begin{table}[h]\fontsize{10}{10}\selectfont \centering
+\caption{Data for $LPO2$ branch for JE.}
+	\begin{tabular}{c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}^p$ / $\mu_{CZ}^s$ / $\mu_{CZ}$\\
+		\hline 3.00374885 & 1.00955895 & 0.04118756 & 1.25694 & $(+/-)$ $\varphi_p = 0.190$, $(+/-)$ $\varphi_s = 1.397$ & 3 / 3 / 6\\
+		3.00371150 & 1.01150895 & 0.03105844 & 1.34143 & $(+/-)$ $\varphi_p = 0.538$, $(+/-)$ $\varphi_s = 1.555$ & 3 / 3 / 6 \\
+		3.00369790 & 1.01200895 & 0.02882949 & 1.37591 &  $(+/-)$ $\varphi_p = 0.625$, $(+/-)$ $\varphi_s = 1.620$ & 3 / 3 / 6 \\
+		3.00363027 & 1.01440084 & 0.01977091 & 1.62295 & $(+/-)$ $\varphi_p = 1.101$, $(+/-)$ $\varphi_s = 2.094$ & 3 / 3 / 6 \\
+		3.00357414 & 1.016776 & 0.0130372 & 2.1215 & $(+/-)$ $\varphi_p = 1.878$, $(+/-)$ $\varphi_s = 3.131$ & 3 / 3 / 6 \\
+		3.00357388 & 1.016787 & 0.013014 & 2.12519 & $(+/-)$ $\varphi_p = 1.885$, $(+/+)$ $\lambda_s = -1.02$ & 3 / 3 / 6 \\
+		3.00356878 & 1.01701395 & 0.01253366 & 2.20708 & $(+/-)$ $\varphi_p = 2.120$, $(-/+)$ $\varphi_s = 3.225$ & 3 / 3 / 6 \\
+		3.00353952 & 1.01771395 & 0.01187914 & 2.65553 & $(+/+)$ $\lambda_p = -9.64$, $(-/+)$ $\varphi_s = 4.144$ & 3 / 3 / 6 \\
+		3.00349789 & 1.01765259 & 0.01364657 & 2.95454 & $(+/+)$ $\lambda_p = -36.3$, $(-/+)$ $\varphi_s = 4.743$ & 3 / 3 / 6 
+	\end{tabular}
+	\label{data_lpo2}
+\end{table}
+
+\begin{table}[h]\fontsize{10}{10}\selectfont \centering
+\caption{Data for $DRO$ branch for JE.}
+	\begin{tabular}{c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}^p$ / $\mu_{CZ}^s$ / $\mu_{CZ}$\\
+		\hline 3.00429783 & 0.99502455 & 0.07670173 & 0.40998 & $(-/+)$ $\varphi_p = 5.862$, $(-/+)$ $\varphi_s = 5.894$ & 1 / 1 / 2\\
+		3.00156431 & 0.99037034 & 0.06224607 & 1.02778 & $(-/+)$ $\varphi_p = 5.245$, $(-/+)$ $\varphi_s = 5.406$ & 1 / 1 / 2 \\
+		3.00101739 & 0.98833167 & 0.06026263 & 1.32856 & $(-/+)$ $\varphi_p = 4.973$, $(-/+)$ $\varphi_s = 5.216$ & 1 / 1 / 2 \\
+		3.00060753 & 0.98623049 & 0.05949811 & 1.64998 & $(-/+)$ $\varphi_p = 4.712$, $(-/+)$ $\varphi_s = 5.050$ & 1 / 1 / 2 \\
+        3.00054882 & 0.98587513 & 0.05946574 & 1.7052 & $(-/+)$ $\varphi_p = 4.670$, $(-/+)$ $\varphi_s = 5.026$ & 1 / 1 / 2 \\
+		2.99962388 & 0.97762100 & 0.06369886 & 3 & $(-/+)$ $\varphi_p = 4.001$, $(-/+)$ $\varphi_s = 4.787$ & 1 / 1 / 2 \\
+		2.99935885 & 0.97409965 & 0.06735824 & 3.5 & $(-/+)$ $\varphi_p = 3.987$, $(-/+)$ $\varphi_s = 4.863$ & 1 / 1 / 2 \\
+		2.99908502 & 0.97038828 & 0.07212000 & 4 & $(-/+)$ $\varphi_p = 3.995$, $(-/+)$ $\varphi_s = 5.001$ & 1 / 1 / 2 \\
+		2.99868251 & 0.96488658 & 0.08024713 & 4.6003 & $(-/+)$ $\varphi_p = 4.185$, $(-/+)$ $\varphi_s = 5.254$ & 1 / 1 / 2
+	\end{tabular}
+	
+	\label{data_dro}
+\end{table}
+
+\begin{table}[h]\fontsize{10}{10} \centering
+\caption{Data for one branch bifurcation from 3rd cover of the $LPO2$-orbit for JE.\ These spatial orbits are simply-symmetric w.r.t.\ the $xz$-plane and ends at collision.\ Its symmetric family is obtained by using the reflection at the $xy$-plane.}
+	\scalebox{0.9}{\begin{tabular}{c|c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $z(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}$\\
+		\hline 3.00363027 & 1.01440084 & 0 & 0.01974709 & 4.86 & $(-/+)$ $\varphi_p^3 = 3.305$, $\varphi_s^3 = 0$ & 14$\,\to\,$16 \\
+        3.00362881 & 1.01439256 & 0.00046114 & 0.01976648 & 4.87 & $(-/+)$ $\varphi_1 = 3.300$, $(-/+)$ $\varphi_2 = 6.281$ & 14 \\
+		3.00359018 & 1.01415816 & 0.00242577 & 0.02031752 & 4.90 & $(-/+)$ $\varphi_1 = 3.208$, $(-/+)$ $\varphi_2 = 6.280$ & 14 \\
+		3.00357914 & 1.01409052 & 0.00273476 & 0.02047842 & 4.91 & $(+/+)$ $\lambda = -1.05$, $(-/+)$ $\varphi = 6.278$ & 14 \\
+		3.00354287 & 1.01386628 & 0.003555363 & 0.02101794 & 4.94 & $(+/+)$ $\lambda = -1.18$, $(-/+)$ $\varphi = 6.255$ & 14 \\
+		3.00325974 & 1.01198527 & 0.00688259 & 0.02594794 & 5.2 & $(+/+)$ $\lambda = -1.62$, $(-/+)$ $\varphi = 5.963$ & 14 \\
+		3.00298774 & 1.00985792 & 0.00824897 & 0.03258269 & 5.5 & $(+/-)$ $\varphi_1 = 2.566$, $(-/+)$ $\varphi_2 = 5.657$ & 14 \\
+		3.00270453 & 1.00652898 & 0.00795347 & 0.04651756 & 5.85 & $(-/+)$ $\varphi_1 = 1.947$, $(-/+)$ $\varphi_2 = 5.978$ & 14 \\
+		3.00264234 & 1.00560524 & 0.00778449 & 0.05051319 & 5.88 & $(+/+)$ $\lambda = -1.09$, $(-/+)$ $\varphi = 5.958$ & 14 \\
+		3.00263168 & 1.00544296 & 0.00774780 & 0.05124733 & 5.88 & $(-/+)$ $\varphi_1 = 3.488$, $(-/+)$ $\varphi_2 = 5.937$ & 14 \\
+        3.00260038 & 1.00454296 & 0.00720347 & 0.05686831 & 5.86 & $(-/+)$ $\varphi_1 = 4.662$, $(-/+)$ $\lambda = 1$ & b-d \\
+        3.00260927 & 1.00399399 & 0.00658371 & 0.06201856 & 5.8 & $(-/+)$ $\varphi = 4.813$, $(+/+)$ $\lambda = 2.278$ & 15 \\
+        3.00266582 & 1.00306075 & 0.00521508 & 0.07465765 & 5.6 & $(-/+)$ $\varphi = 4.443$, $(+/+)$ $\lambda = 3.660$ & 15 \\
+        3.00278841 & 1.00150186 & 0.00269606 & 0.11584022 & 5 & $(-/+)$ $\varphi = 3.653$, $(+/+)$ $\lambda = 1.829$ & 15 \\
+        3.00279353 & 1.00129733 & 0.00238127 & 0.12512611 & 4.9 & $(-/+)$ $\varphi_1 = 3.540$, $(-/+)$ $\lambda = 1$ & b-d \\
+        3.00277937 & 1.00084704 & 0.00169978 & 0.15351993 & 4.66 & $(-/+)$ $\varphi_1 = 3.246$, $(-/+)$ $\varphi_2 = 5.702$ & 14 
+	\end{tabular}}
+	\label{data_lpo2_3rd_cover_1}
+\end{table}
+
+\begin{table}[t]\fontsize{10}{10} \centering
+\caption{Data for one branch bifurcation from $LPO2^3$-orbit for JE, ending at $DRO^5$.\ The CZ-index is constant, and gives a bridge between the planar orbits.\ These spatial orbits are $x$-axis-symmetric. Its symmetric family is obtained by reflection at the ecliptic.}
+	\scalebox{0.9}{\begin{tabular}{c|c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $\dot{z}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}$\\
+		\hline 3.00363027 & 1.01440084 & 0.01974709 & 0 & 4.86 & $(-/+)$ $\varphi_p^3 = 3.305$, $\varphi_s^3 = 0$ & 14$\,\to\,$16 \\
+        3.00351924 & 1.01408954 & 0.01928185 & 0.01342237 & 4.96 & $(-/-)$ $\lambda_1 = -1.24$, $(-/-)$ $\lambda_2 = 1.09$ & 15 \\
+		3.00321170 & 1.01314307 & 0.01799332 & 0.02676988 & 5.25 & $(-/-)$ $\lambda_1 = -1.62$, $(-/-)$ $\lambda_2 = 1.45$ & 15 \\
+		3.00302231 & 1.01246670 & 0.01723541 & 0.03300118 & 5.46 & $(+/-)$ $\varphi = 2.749$, $(-/-)$ $\lambda = 1.78$ & 15 \\
+		3.00273486 & 1.01099334 & 0.01657953 & 0.04285920 & 5.82 & $(+/-)$ $\varphi = 1.618$, $(-/-)$ $\lambda = 1.55$ & 15 \\
+		3.00270684 & 1.01077857 & 0.01644568 & 0.04412031 & 5.85 & $(+/-)$ $\varphi = 1.801$, $(-/-)$ $\lambda = 1.40$ & 15 \\
+		3.00266563 & 1.01548137 & 0.01548137 & 0.04575934 & 5.88 & $(+/-)$ $\varphi = 2.506$, $(-/-)$ $\lambda = 1.35$ & 15 \\
+		3.00243536 & 1.01068879 & 0.00516070 & 0.04995370 & 6 & $(-/+)$ $\varphi = 5.761$, $(-/-)$ $\lambda = 8.52$ & 15 \\
+		3.00204821 & 1.01119864 & $-$0.01174966 & 0.05089250 & 6.24 & $(-/+)$ $\varphi = 5.965$, $(-/-)$ $\lambda = 31.1$ & 15 \\
+		3.00172312 & 1.01167768 & $-$0.02457421 & 0.04793350 & 6.5 & $(-/+)$ $\varphi = 6.016$, $(-/-)$ $\lambda = 30.0$ & 15 \\
+		3.00147493 & 1.01207539 & $-$0.03349482 & 0.04374826 & 6.75 & $(-/+)$ $\varphi = 6.070$, $(-/-)$ $\lambda = 22.3$ & 15 \\
+		3.00127220 & 1.01242785 & $-$0.04020652 & 0.03910792 & 7 & $(-/+)$ $\varphi = 6.124$, $(-/-)$ $\lambda = 15.2$ & 15 \\
+		3.00096072 & 1.01304236 & $-$0.04944170 & 0.02947258 & 7.5 & $(-/+)$ $\varphi = 6.201$, $(-/-)$ $\lambda = 6.16$ & 15 \\
+		3.00073221 & 1.01358551 & $-$0.05528744 & 0.01932635 & 8 & $(-/+)$ $\varphi = 5.911$, $(-/-)$ $\lambda = 1.14$ & 15\\
+		3.00055690 & 1.01409401 & $-$0.05914769 & 0.00388381 & 8.5 & $(-/+)$ $\varphi = 4.550$, $(-/-)$ $\lambda = 1.00$ & 15 \\
+        3.00054882 & 1.01412064 & $-$0.05930512 & 0 & 8.52 & $(-/+)$ $\varphi_p^5 = 4.500$, $\varphi_s^5 = 0$ & 16$\,\to\,$14 \\
+	\end{tabular}}
+	\label{data_lpo2_3rd_cover_2}
+\end{table}
+
+
+
+\begin{table}[b]\fontsize{10}{10} \centering
+\caption{Data for one branch bifurcation from $g$-$LPO1^3$ for JE.\ These spatial orbits are $x$-axis-symmetric and connected to one branch bifurcation from $DPO^3$ via b-d.\ Its symmetric family is obtained by reflection at the ecliptic.}
+	\scalebox{0.9}{\begin{tabular}{c|c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $\dot{z}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}$\\
+		\hline 3.00365597 & 0.98557900 & $-$0.01951876 & 0 & 4.79 & $(-/+)$ $\varphi_p^3 = 3.205$, $\varphi_s^3 = 0$ & 14$\,\to\,$16 \\
+        3.00365338 & 0.98556744 & $-$0.01945341 & 0.00182488 & 4.80 & $(-/+)$ $\varphi = 3.214$, $(-/-)$ $\lambda = 1.001$ & 15 \\
+		3.00363389 & 0.98561874 & $-$0.01938011 & 0.00580611 & 4.82 & $(-/-)$ $\lambda_1 = -1.01$, $(-/-)$ $\lambda_2 = 1.005$ & 15 \\
+        3.00329911 & 0.98657072 & $-$0.01815373 & 0.02416862 & 5.12 & $(-/-)$ $\lambda_1 = -1.54$, $(-/-)$ $\lambda_2 = 1.378$ & 15 \\
+        3.00314093 & 0.98708523 & $-$0.01763006 & 0.02950246 & 5.30 & $(-/-)$ $\lambda_1 = -1.02$, $(-/-)$ $\lambda_2 = 1.685$ & 15 \\
+        3.00300399 & 0.98759083 & $-$0.01727225 & 0.03377964 & 5.46 & $(+/-)$ $\varphi = 2.290$, $(-/-)$ $\lambda = 1.977$ & 15 \\
+        3.00281046 & 0.98856773 & $-$0.01745284 & 0.04009001 & 5.73 & $(+/-)$ $\varphi = 0.976$, $(-/-)$ $\lambda = 2.451$ & 15 \\
+        3.00275889 & 0.98918471 & $-$0.01885469 & 0.04265726 & 5.82 & $(+/-)$ $\varphi = 0.134$, $(-/-)$ $\lambda = 4.422$ & 15 \\
+         & & & & & & b-d \\
+         3.00275823 & 0.98925887 & $-$0.01917383 & 0.04284561 & 5.82 & $(-/-)$ $\lambda_1 = 1.041$, $(-/-)$ $\lambda_2 = 5.013$ & 14 \\
+         3.00276196 & 0.98939330 & $-$0.01992825 & 0.04305515 & 5.83 & $(-/-)$ $\lambda_1 = 1.148$, $(-/-)$ $\lambda_2 = 6.636$ & 14 \\
+         3.00296320 & 0.98997681 & $-$0.03157520 & 0.03598567 & 5.75 & $(-/-)$ $\lambda_1 = 1.064$, $(-/-)$ $\lambda_2 = 100.2$ & 14 \\
+         3.00316033 & 0.99025736 & $-$0.04249067 & 0.02045809 & 5.68 & $(-/-)$ $\lambda_1 = 1.011$, $(-/-)$ $\lambda_2 = 400.3$ & 14 \\
+         3.00323676 & 0.99035914 & $-$0.04685850 & 0.00096495 & 5.65 & $(-/-)$ $\lambda_1 = 1.0001$, $(-/-)$ $\lambda_2 = 619.3$ & 14 \\
+         3.00323697 & 0.99035942 & $-$0.04686768 & 0 & 5.65 & $\varphi_s^3 = 0$, $(-/-)$ $\lambda = 620.23$ & 13$\,\to\,$15
+	\end{tabular}}
+	\label{data_lpo1_3rd_cover_1}
+\end{table}
+
+%\vspace{-15cm}
+
+\begin{table}[h]\fontsize{10}{10} \centering
+\caption{Data for one branch bifurcation from 3rd cover of the $g$-$LPO1$-orbit for JE.\ These spatial orbits are simply-symmetric w.r.t.\ the $xz$-plane and they are connected to one branch bifurcation from the 3rd cover of the $DPO$-orbit via birth-death.\ Its symmetric family is obtained by using the reflection at the ecliptic.}
+	\scalebox{0.9}{\begin{tabular}{c|c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $z(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}$\\
+		\hline 3.00365597 & 0.98557900 & 0 & $-$0.01951876 & 4.79 & $(-/+)$ $\varphi_p^3 = 3.205$, $\varphi_s^3 = 0$ & 14$\,\to\,$16 \\
+        3.00365461 & 0.98556706 & $-$0.00036219 & $-$0.01947401 & 4.80 & $(-/+)$ $\varphi_1 = 3.215$, $(-/+)$ $\varphi_2 = 6.281$ & 14 \\
+		3.00363389 & 0.98568597 & $-$0.00175392 & $-$0.01975974 & 4.82 & $(+/+)$ $\lambda = -1.01$, $(-/+)$ $\varphi = 6.277$ & 14 \\
+		3.00360033 & 0.98588066 & $-$0.00278699 & $-$0.02023321 & 4.84 & $(+/+)$ $\lambda = -1.12$, $(-/+)$ $\varphi = 6.263$ & 14 \\
+        3.00331461 & 0.98766211 & $-$0.00655464 & $-$0.02492170 & 5.11 & $(+/+)$ $\lambda = -1.52$, $(-/+)$ $\varphi = 5.978$ & 14 \\
+        3.00314742 & 0.98883839 & $-$0.00763969 & $-$0.02842198 & 5.29 & $(+/-)$ $\varphi_1 = 3.031$, $(-/+)$ $\varphi_2 = 5.756$ & 14 \\
+        3.00289637 & 0.99094696 & $-$0.00836889 & $-$0.03579903 & 5.61 & $(+/-)$ $\varphi_1 = 1.373$, $(-/+)$ $\varphi_2 = 5.309$ & 14 \\
+        3.00285045 & 0.99142732 & $-$0.00835072 & $-$0.03776509 & 5.67 & $0.376 \pm 0.570 i$, $0.806 \pm 1.221 i$ & 14 \\
+        3.00277633 & 0.99243798 & $-$0.00805049 & $-$0.04244268 & 5.78 & $0.491 \pm 0.121 i$, $1.917 \pm 0.472 i$ & 14 \\
+        3.00277358 & 0.99249304 & $-$0.00802039 & $-$0.04284315 & 5.79 & $(+/+)$ $\lambda_1 = 1.987$, $(-/-)$ $\lambda_2 = 2.016$ & 14 \\
+        3.00276770 & 0.993012244 & $-$0.00750257 & $-$0.04644237 & 5.82 & $(+/+)$ $\lambda_1 = 1.000$, $(-/-)$ $\lambda_2 = 7.181$ & 14 \\
+         & & & & & & b-d \\
+        3.00277093 & 0.99302677 & 0.00744432 & $-$0.04668427 & 5.82 & $(-/+)$ $\varphi = 6.138$, $(-/-)$ $\lambda = 8.013$ & 13 \\
+        3.00296373 & 0.99201168 & 0.00567451 & $-$0.04755480 & 5.75	& $(-/+)$ $\varphi = 6.233$, $(-/-)$ $\lambda = 100.3$ & 13 \\
+        3.00316033 & 0.99081340 & 0.00306250 & $-$0.04704925 & 5.68 & $(-/+)$ $\varphi = 6.263$, $(-/-)$ $\lambda = 400.3$ & 13 \\
+        3.00323697 & 0.99035942 & 0 & $-$0.04686768 & 5.65 & $(-/-)$ $\lambda = 620.23$, $\varphi_s^3 = 0$ & 13$\,\to\,$15
+	\end{tabular}}
+	\label{data_lpo1_3rd_cover_2}
+\end{table}
+
+
+\begin{table}[htbp]\fontsize{10}{10}\selectfont \centering
+\caption{$g$-$LPO1$ branch for SE.}
+\begin{tabular}{c|c|c|c|c|c}
+\hline 
+	$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}^p$ / $\mu_{CZ}^s$ / $\mu_{CZ}$\\
+	\hline 3.00033109 & 1.00061213 & 0.01702742 & 0.22681 & $(+/-)$ $\varphi_p = 0.218$, $(+/-)$ $\varphi_s = 0.232$ & 3 / 3 / 6\\
+    3.00015209 & 1.00157026 & 0.00982528 & 1.13552 & $(+/-)$ $\varphi_p = 0.421$, $(+/-)$ $\varphi_s = 1.245$ & 3 / 3 / 6\\
+    3.00014609 & 1.00109981 & 0.01422219 & 1.33077 & $(+/-)$ $\varphi_p = 0.534$, $(+/-)$ $\varphi_s = 1.549$ & 3 / 3 / 6 \\
+    3.00014309 & 1.00076095 & 0.01889960 & 1.60328 & $(+/-)$ $\varphi_p = 1.118$, $(+/-)$ $\varphi_s = 2.081$ & 3 / 3 / 6 \\
+    3.00014089 & 1.00047925 & 0.02552883 & 2.13798 & $(+/-)$ $\varphi_p = 1.962$, $(+/+)$ $\lambda_s = -1.06$ & 3 / 3 / 6 \\
+    3.00014069 & 1.00044659 & 0.02664172 & 2.22579 & $(+/-)$ $\varphi_p = 2.302$, $(-/+)$ $\varphi_s = 3.324$ & 3 / 3 / 6 \\
+    3.00014049 & 1.00041446 & 0.02785333 & 2.31612 & $(+/+)$ $\lambda_p = -1.58$, $(-/+)$ $\varphi_s = 3.513$ & 3 / 3 / 6 \\
+    3.00013817 & 1.00020619 & 0.04126365 & 2.90065 & $(+/+)$ $\lambda_p = -35.5$, $(-/+)$ $\varphi_s = 4.711$ & 3 / 3 / 6
+\end{tabular}
+\label{data_g_lpo1_s_e}
+\end{table}
+
+\begin{table}[h]\fontsize{10}{10}\selectfont \centering
+\caption{$DPO$ branch for SE.}
+	\begin{tabular}{c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}^p$ / $\mu_{CZ}^s$ / $\mu_{CZ}$\\
+		\hline 3.00014744 &	0.99838904 & $-$0.00977411 & 1.23860 & $(-/-)$ $\lambda_p = 1.188$, $(+/-)$ $\varphi_s = 1.364$ & 2 / 3 / 5\\
+        3.00014064 & 0.99826971 & $-$0.00934116 & 1.41906 & $(-/-)$ $\lambda_p = 2.270$, $(+/-)$ $\varphi_s = 1.571$ & 2 / 3 / 5\\
+        3.00012744 & 0.99811661 & $-$0.00917943 & 1.88166 & $(-/-)$ $\lambda_p = 8.463$, $(+/-)$ $\varphi_s = 2.091$ & 2 / 3 / 5\\
+        3.00011304 & 0.99809959 & $-$0.00985129 & 2.46619 & $(-/-)$ $\lambda_p = 46.25$, $(+/-)$ $\varphi_s = 2.697$ & 2 / 3 / 5\\
+        3.00010524 & 0.99815786 & $-$0.01051283 & 2.76504 & $(-/-)$ $\lambda_p = 101.1$, $(+/-)$ $\varphi_s = 2.979$ & 2 / 3 / 5\\
+        3.00008192 & 0.99846180 & $-$0.01309687 & 3.59018 & $(-/-)$ $\lambda_p = 500.3$, $(+/-)$ $\varphi_s = 3.699$ & 2 / 3 / 5\\
+        3.00006838 & 0.99867270 & $-$0.01491712 & 4.08764 & $(-/-)$ $\lambda_p = 911.4$, $(+/-)$ $\varphi_s = 4.164$ & 2 / 3 / 5
+        \end{tabular}
+	\label{data_dpo_s_e}
+\end{table}
+
+\begin{table}[h]\fontsize{10}{10}\selectfont \centering
+\caption{$LPO2$ branch for SE.}
+	\begin{tabular}{c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}^p$ / $\mu_{CZ}^s$ / $\mu_{CZ}$\\
+		\hline 3.00014639 & 1.00217453 & 0.00646333 & 1.30672 & $(+/-)$ $\varphi_p = 0.451$, $(+/-)$ $\varphi_s = 1.499$ & 3 / 3 / 6\\
+        3.00014319 & 1.00276240 & 0.00405869 & 1.57114 & $(+/-)$ $\varphi_p = 1.018$, $(+/-)$ $\varphi_s = 2.009$ & 3 / 3 / 6\\
+        3.00014299 & 1.00279991 & 0.00393120 & 1.59627 & $(+/-)$ $\varphi_p = 1.060$, $(+/-)$ $\varphi_s = 2.059$ & 3 / 3 / 6\\
+        3.00014075 & 1.00328757 & 0.00253817 & 2.11312 & $(+/-)$ $\varphi_p = 1.881$, $(+/+)$ $\lambda_s = -1.03$ & 3 / 3 / 6\\
+        3.00014061 & 1.00331899 & 0.00247078 & 2.17031 & $(+/-)$ $\varphi_p = 2.043$, $(-/+)$ $\varphi_s = 3.142$ & 3 / 3 / 6 \\
+		  & & & & & \\
+		3.00014030 & 1.00338269 & 0.00235356 & 2.31077 & $(+/+)$ $\lambda_p = -1.22$, $(-/+)$ $\varphi_s = 3.484$ & 3 / 3 / 6 \\
+		3.00013613 & 1.00339866 & 0.00308260 & 3.07749 & $(+/+)$ $\lambda_p = -69.2$, $(-/+)$ $\varphi_s = 5.041$ & 3 / 3 / 6
+	\end{tabular}
+	\label{data_lpo2_s_e}
+\end{table}
+
+\begin{table}[h]\fontsize{10}{10}\selectfont \centering
+\caption{$DRO$ branch for SE.}
+	\begin{tabular}{c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}^p$ / $\mu_{CZ}^s$ / $\mu_{CZ}$\\
+		\hline 3.00010525 & 1.00137692 & $-$0.01325298 & 0.67023 & $(-/+)$ $\varphi_p = 5.595$, $(-/+)$ $\varphi_s = 5.673$ & 1 / 1 / 2\\
+        3.00004405 & 1.00224224 & $-$0.01182054 & 1.29643 & $(-/+)$ $\varphi_p = 5.001$, $(-/+)$ $\varphi_s = 5.234$ & 1 / 1 / 2 \\
+        3.00002425 & 1.00276541 & $-$0.01163206 & 1.70339 & $(-/+)$ $\varphi_p = 4.671$, $(-/+)$ $\varphi_s = 5.027$ & 1 / 1 / 2 \\
+        2.99999205 & 1.00419386 & $-$0.01226462 & 2.84090 & $(-/+)$ $\varphi_p = 4.060$, $(-/+)$ $\varphi_s = 4.785$ & 1 / 1 / 2 \\
+        2.99996645 & 1.00592895 & $-$0.01421020 & 4.06771 & $(-/+)$ $\varphi_p = 4.007$, $(-/+)$ $\varphi_s = 5.025$ & 1 / 1 / 2 \\
+        2.99995365 & 1.00682933 & $-$0.01550883 & 4.56302 & $(-/+)$ $\varphi_p = 4.172$, $(-/+)$ $\varphi_s = 5.236$ & 1 / 1 / 2 \\
+        2.99986545 & 1.01156940 & $-$0.02377257 & 5.79878 & $(-/+)$ $\varphi_p = 5.114$, $(-/+)$ $\varphi_s = 5.951$ & 1 / 1 / 2
+	\end{tabular}
+	\label{data_dro_s_e}
+\end{table}
+
+\begin{table}[h]\fontsize{10}{10} \centering
+\caption{Purple 14 for SE. These spatial orbits are simply-symmetric w.r.t.\ the $xz$-plane and ends at collision.\ Its symmetric family is obtained by using the reflection at the $xy$-plane.}
+	\scalebox{0.9}{\begin{tabular}{c|c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $z(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}$\\
+		\hline 3.00014299 & 1.00279991 & 0 & 0.00393120 & 4.78 & $(-/+)$ $\varphi_p^3 = 3.182$, $\varphi_s^3 = 0$ & 14$\,\to\,$16 \\
+        3.00014260 & 1.00281790 & 0.00019127 & 0.00386379 & 4.84 & $(-/+)$ $\varphi_1 = 3.259$, $(-/+)$ $\varphi_2 = 6.282$ & 14 \\
+        3.00014129 & 1.00277804 & 0.00047538 & 0.00395858 & 4.87 & $(+/+)$ $\lambda = 3.208$, $(-/+)$ $\varphi = 6.280$ & 14 \\
+        3.00012209 & 1.00211470 & 0.00153818 & 0.00578987 & 5.36 & $(+/-)$ $\varphi_1 = 3.111$, $(-/+)$ $\varphi_2 = 5.740$ & 14 \\
+        3.00010829 & 1.00137563 & 0.00156298 & 0.00875806 &	5.82 & $(-/+)$ $\varphi_1 = 0.776$, $(-/+)$ $\varphi_2 = 5.669$ & 14 \\
+        3.00010291 & 1.00087722 & 0.00139401 & 0.01128814 & 5.86 & $(+/-)$ $\varphi_1 = 4.665$, $(-/+)$ $\varphi_2 = 6.126$ & 14 \\
+        & & & & & & b-d \\
+        3.00010295 & 1.00083899 & 0.00135458 & 0.01162196 & 5.84 & $(-/+)$ $\varphi = 4.783$, $(+/+)$ $\lambda = 1.517$ & 15 \\
+        3.00010612 & 1.00055789 & 0.00095022 & 0.01542803 & 5.53 & $(-/+)$ $\varphi = 4.334$, $(+/+)$ $\lambda = 3.712$ & 15 \\
+        3.00011036 & 1.00024558 & 0.00044664 & 0.02518603 & 4.86 & $(-/+)$ $\varphi = 3.504$, $(+/+)$ $\lambda = 1.109$ & 15 \\
+        & & & & & & b-d \\
+        3.00011031 & 1.00021998 & 0.00040764 & 0.02663091 & 4.80 & $(-/+)$ $\varphi_1 = 3.424$, $(-/+)$ $\varphi_2 = 5.916$ & 14 \\
+        3.00010281 & 1.00003238 & 0.00010169 & 0.05878312 & 4.17 & $(-/+)$ $\varphi_1 = 3.781$, $(-/+)$ $\varphi_2 = 5.884$ & 14 \\
+        3.00010021 & 1.00001491 & 0.00006054 & 0.07739259 & 4.08 & $(-/+)$ $\varphi_1 = 3.965$, $(-/+)$ $\varphi_2 = 6.041$ & 14
+	\end{tabular}}
+	\label{purple14_saturn_enceladus}
+\end{table}
+
+\begin{table}[h]\fontsize{10}{10} \centering
+\caption{Red 15 for SE. The CZ-index is constant, and gives a bridge between the planar orbits.\ These spatial orbits are $x$-axis-symmetric. Its symmetric family is obtained by reflection at the ecliptic.}
+	\scalebox{0.9}{\begin{tabular}{c|c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $\dot{z}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}$\\
+		\hline 3.00014299 & 1.00279991 & 0.00393120 & 0 & 4.78 & $(-/+)$ $\varphi_p^3 = 3.182$, $\varphi_s^3 = 0$ & 14$\,\to\,$16 \\
+        3.00013559 & 1.00272159 & 0.00369764 & 0.00343416 & 5.00 & $(-/-)$ $\lambda_1 = -1.39$, $(-/-)$ $\lambda_2 = 1.13$ & 15 \\
+        3.00012559 & 1.00256280 & 0.00349797 & 0.00541943 & 5.26 & $(-/-)$ $\lambda_1 = -1.53$, $(-/-)$ $\lambda_2 = 1.52$ & 15 \\
+        3.00012139 & 1.00248791 & 0.00342004 & 0.00611889 & 5.38 & $(+/-)$ $\varphi = 2.928$, $(-/-)$ $\lambda = 1.73$ & 15 \\
+        3.00011759 & 1.00241319 & 0.00335832 & 0.00672992 & 5.50 & $(+/-)$ $\varphi = 2.395$, $(-/-)$ $\lambda = 1.90$ & 15 \\
+        3.00010399 & 1.00204385 & 0.00282460 & 0.00925842 & 5.90 & $(-/+)$ $\varphi = 3.184$, $(-/-)$ $\lambda = 1.41$ & 15 \\
+        3.00009759 & 1.00208424 & 0.00127533 & 0.00976558 & 5.98 & $(-/+)$ $\varphi = 5.692$, $(-/-)$ $\lambda = 6.55$ & 15 \\
+        3.00009417 & 1.00210781 & 0.00047162 & 0.00992209 & 6.03 & $(-/+)$ $\varphi = 5.846$, $(-/-)$ $\lambda = 13.5$ & 15 \\
+        3.00009145 & 1.00212691 & $-$0.00015208 & 0.00999912 & 6.07 & $(-/+)$ $\varphi = 5.888$, $(-/-)$ $\lambda = 18.8$ & 15 \\
+        3.00007425 & 1.00225503 & $-$0.00382600 & 0.00970041 & 6.38 & $(-/+)$ $\varphi = 5.974$, $(-/-)$ $\lambda = 32.3$ & 15 \\
+        3.00005185 & 1.00244477 & $-$0.00788343 & 0.00765368 & 7.00 & $(-/+)$ $\varphi = 6.092$, $(-/-)$ $\lambda = 15.2$ & 15 \\
+        3.00004205 & 1.00254154 & $-$0.00938862 & 0.00615688 & 7.40 & $(-/+)$ $\varphi = 6.171$, $(-/-)$ $\lambda = 7.51$ & 15 \\
+        3.00003105 & 1.00266948 & $-$0.01085595 & 0.00374582 & 8.01 & $(-/+)$ $\varphi = 5.829$, $(-/-)$ $\lambda = 1.08$ & 15 \\
+        3.00002425 & 1.00276636 & $-$0.01162574 & 0.00034005 & 8.51 & $(-/+)$ $\varphi = 4.510$, $(-/-)$ $\lambda = 1.05$ & 15\\
+        3.00002405 & 1.00277176 & $-$0.01163165 & 0 &	8.54 & $(-/+)$ $\varphi_p^5 = 4.489$, $\varphi_s^5 = 0$ & 16$\,\to\,$14 \\  
+	\end{tabular}}
+	\label{red15_saturn_enceladus}
+\end{table}
+
+\begin{table}[h]\fontsize{10}{10} \centering
+\caption{Blue 15 and Blue 14 for SE. These spatial orbits are $x$-axis-symmetric and connected to one branch bifurcation from $DPO^3$ via b-d.\ Its symmetric family is obtained by reflection at the ecliptic.}
+	\scalebox{0.9}{\begin{tabular}{c|c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $\dot{y}(0)$ & $\dot{z}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}$\\
+		\hline 3.00014309 & 0.99718487 & $-$0.00386895 & 0 & 4.80 & $(-/+)$ $\varphi_p^3 = 3.217$, $\varphi_s^3 = 0$ & 14$\,\to\,$16 \\
+        3.00014289 & 0.99717670 & $-$0.00383214 & 0.00048106 & 4.83 & $(-/+)$ $\varphi = 3.246$, $(-/-)$ $\lambda = 1.016$ & 15 \\
+        3.00014169 & 0.99719319 & $-$0.00380810 & 0.00145833 & 4.85 & $(-/-)$ $\lambda_1 = -1.04$, $(-/-)$ $\lambda_2 = 1.027$ & 15 \\
+        3.00013425 & 0.99730021 & $-$0.00365996 & 0.00377737 & 5.02 & $(-/-)$ $\lambda_1 = -1.45$, $(-/-)$ $\lambda_2 = 1.183$ & 15 \\
+        3.00012251 & 0.99749232 & $-$0.00343875 & 0.00594605 & 5.34 & $(-/-)$ $\lambda_1 = -1.03$, $(-/-)$ $\lambda_2 = 1.700$ & 15 \\
+        3.00012093 & 0.99752153 & $-$0.00341248 & 0.00620193 & 5.39 &	$(+/-)$ $\varphi = 2.758$, $(-/-)$ $\lambda = 1.782$ & 15 \\
+        3.00011193 & 0.99772535 & $-$0.00333595 & 0.00766874 & 5.69 & $(+/-)$ $\varphi = 0.976$, $(-/-)$ $\lambda = 2.451$ & 15 \\
+        3.00010800 & 0.99793026 & $-$0.00365343 & 0.00862538 & 5.84 & $(+/-)$ $\varphi = 0.092$, $(-/-)$ $\lambda = 2.549$ & 15 \\
+         & & & & & & b-d \\
+        3.00010820 & 0.99796166 & $-$0.00381731 & 0.00868408 & 5.84 & $(-/-)$ $\lambda_1 = 1.196$, $(-/-)$ $\lambda_2 = 3.812$ & 14 \\
+        3.00010958 & 0.99799080 & $-$0.00423992 & 0.00854277 & 5.83 & $(-/-)$ $\lambda_1 = 1.171$, $(-/-)$ $\lambda_2 = 10.02$ & 14 \\ 
+        3.00012042 & 0.99807079 & $-$0.00718764 & 0.00594564 & 5.71 & $(-/-)$ $\lambda_1 = 1.068$, $(-/-)$ $\lambda_2 = 203.9$ & 14 \\ 
+        3.00012568 & 0.99810519 & $-$0.00868716 & 0.00307711 & 5.66 & $(-/-)$ $\lambda_1 = 1.011$, $(-/-)$ $\lambda_2 = 485.0$ & 14 \\ 
+        3.00012738 & 0.99811615 & $-$0.00918031 & 0 & 5.65 & $\varphi_s^3 = 0$, $(-/-)$ $\lambda_p = 620.1$ & 13$\,\to\,$15
+	\end{tabular}}
+	\label{blue15_saturn_enceladus}
+\end{table}
+
+\begin{table}[h]\fontsize{10}{10} \centering
+\caption{Green 14 and Green 13 for SE. These spatial orbits are simply-symmetric w.r.t.\ the $xz$-plane and they are connected to one branch bifurcation from the 3rd cover of the $DPO$-orbit via b-d.\ Its symmetric family is obtained by using the reflection at the ecliptic.}
+	\scalebox{0.9}{\begin{tabular}{c|c|c|c|c|c|c}
+ \hline
+		$\Gamma$ & $x(0)$ & $z(0)$ & $\dot{y}(0)$ & $T$ & ($C/B$)-sign \& Floquet multipliers & $\mu_{CZ}$\\
+		\hline 3.00014306 &	0.99718487 & 0 & $-$0.00386895 & 4.80 & $(-/+)$ $\varphi_p^3 = 3.217$, $\varphi_s^3 = 0$ & 14$\,\to\,$16 \\
+        3.00014210 & 0.99720294 & 0.00036902 & $-$0.00390227 & 4.84 & $(-/+)$ $\varphi_1 = 3.197$, $(-/+)$ $\varphi_2 = 6.282$ & 14 \\
+        3.00014182 & 0.99721138 & 0.00041974 & $-$0.00392247 & 4.85 & $(+/+)$ $\lambda = -1.01$, $(-/+)$ $\varphi = 6.281$ & 14 \\
+        3.00013324 & 0.99748294 & 0.00114054 & $-$0.00461090 & 5.05 & $(+/+)$ $\lambda = -1.48$, $(-/+)$ $\varphi = 6.089$ & 14 \\
+        3.00012084 & 0.99793674 & 0.00156551 & $-$0.00595530 & 5.39 & $(+/-)$ $\varphi_1 = 2.704$, $(-/+)$ $\varphi_2 = 5.684$ & 14 \\
+        3.00011446 & 0.99822206 & 0.00164295 & $-$0.00696832 & 5.60 & $(+/-)$ $\varphi_1 = 1.776$, $(-/+)$ $\varphi_2 = 5.499$ & 14 \\
+        3.00011146 & 0.99838620 & 0.00163494 & $-$0.00763914 & 5.71 & $0.458 \pm 0.723 i$, $0.624 \pm 0.986 i$ & 14 \\
+        3.00010841 & 0.99863569 & 0.00153928 & $-$0.00887793 & 5.82 &	$0.595 \pm 0.212 i$, $1.489 \pm 0.530 i$ & 14 \\
+        3.00010824 & 0.99866658 & 0.00151731 & $-$0.00906541 & 5.83 & $(+/+)$ $\lambda_1 = 1.448$, $(-/-)$ $\lambda_2 = 1.786$ & 14 \\
+        3.00010818 & 0.99869599 & 0.00149114 & $-$0.00926286 & 5.84 & $(+/+)$ $\lambda_1 = 1.034$, $(-/-)$ $\lambda_2 = 2.566$ & 14 \\
+         & & & & & & b-d \\
+        3.00010852 & 0.99871851 & 0.00144710 & $-$0.00949590 & 5.84 & $(-/+)$ $\varphi = 6.109$, $(-/-)$ $\lambda = 4.479$ & 13 \\
+        3.00010970 & 0.99869031 & 0.00139716 & $-$0.00954957 & 5.83 & $(-/+)$ $\varphi = 6.135$, $(-/-)$ $\lambda = 10.065$ & 13 \\
+        3.00011700 & 0.99844373 & 0.00110062 & $-$0.00936425 & 5.75 & $(-/+)$ $\varphi = 6.253$, $(-/-)$ $\lambda = 102.96$ & 13 \\
+        3.00012680 & 0.99813343 & 0.00026518 & $-$0.00918878 & 5.65 & $(-/+)$ $\varphi = 6.280$, $(-/-)$ $\lambda = 572.25$ & 13 \\
+        3.00012738 & 0.99811615 & 0 & $-$0.00918031 & 5.65 & $\varphi_s^3 = 0$, $(-/-)$ $\lambda_p = 620.1$ & 13$\,\to\,$15
+	\end{tabular}}
+	\label{green14_saturn_enceladus}
+\end{table}
+\clearpage
+\printbibliography
+
+
+\end{document}
