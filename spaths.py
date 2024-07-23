@@ -475,8 +475,6 @@ def reduce_symplectic_matrix(S, steps=200):
 
 
 
-
-
 def interpolate_K(K, dim, steps):
     U = KtoU(K)
     eigU, basis = np.linalg.eig(U)
@@ -571,36 +569,18 @@ def path_hyperbolic_basepoint(S, steps=200):
         Rpath[i][idx1, idx1] = 1.0 / eigenval_path[i]
     return np.real(np.concatenate((Spath, Rpath)) )
 
-
-
-
 def compute_angular_index(cdets, T):
-    angle = 0
-    for i in range(T):
-        delta = cdets[i+1] / cdets[i]
-        angle += np.imag(np.log(delta))
-    return int(np.round(angle / np.pi) )
-
-
+    angle_jumps = [np.imag(np.log(cdets[i+1] / cdets[i] )) for i in range(T-1)]
+    return int(np.round(np.sum(angle_jumps) /np.pi) ), angle_jumps
 
 def check_symplecticity(s_path):
-    vals = []
-    for A in s_path:
-        vals.append(np.sum(np.abs(A.transpose() @ Omega4 @ A -Omega4) ) )
-    return vals
+    return [np.sum(np.abs(A.transpose() @ Omega4 @ A -Omega4) ) for A in s_path]
 
 def check_maslov_intersections(s_path):
-    maslov_ints = []
-    for i in range(len(s_path) - 1):
-        maslov_ints.append(maslov_func(s_path[i+1]) * maslov_func(s_path[i]) )
-    return maslov_ints
+    return [maslov_func(s_path[i+1]) * maslov_func(s_path[i]) for i in range(len(s_path) - 1)] 
 
 def check_continuity(s_path):
-    jumps = []
-    for i in range(len(s_path) - 1):
-        jumps.append(np.sum(np.abs(s_path[i+1] - s_path[i] ) ) )
-    return jumps
-
+    return [np.sum(np.abs(s_path[i+1] - s_path[i] ) ) for i in range(len(s_path) - 1)]
 
 def get_index_sympl_path(s_path, steps=20000, error_report=False):
     path_reduced = reduce_symplectic_matrix(s_path[-1], steps=steps)
@@ -609,12 +589,16 @@ def get_index_sympl_path(s_path, steps=20000, error_report=False):
     concat_path = np.concatenate((path_reduced, second_path))
     extend_s_path = np.concatenate( (s_path, concat_path) )
     cdets = retract_sympl_path(extend_s_path)
-    CZ = compute_angular_index(cdets, len(cdets)-1)
+    CZ, angle_jumps = compute_angular_index(cdets, len(cdets)-1)
     # For reliability checking
     if error_report:
         symplecticity = np.max( check_symplecticity(extend_s_path))
         extension_sign = np.min(check_maslov_intersections(concat_path))
         continuity = np.max(check_continuity(extend_s_path))
+        max_angle_jump = np.max(angle_jumps)
+        print("Max angle jump at ", np.argmax(angle_jumps), len(angle_jumps ), "; jump size=", max_angle_jump)
+        if max_angle_jump > np.pi:
+            print("Angle jump is too large: increase the number of integration steps")
         print("Error in symplecticity was at most", symplecticity)
         if extension_sign > 0:
             print("Extention stayed away from Maslov cycle; closest at value", extension_sign)
