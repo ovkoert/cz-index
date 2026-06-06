@@ -38,4 +38,9 @@ The widgets are interactive, but need to be executed in order to work.
 
 ### orbits_se
 This directory contains some data for orbits for convenient reproduction of the results of the paper, including the halo-polar orbit.
-The data is not neatly ordered by energy, nor is the mass parameter everywhere the same, so please read the parameters before using..
+The data is not neatly ordered by energy, nor is the mass parameter everywhere the same, so please read the parameters before using.
+
+### Update:
+* The code was been somewhat optimized by performing some vectorization (eg. elimination of some loops) as well as removing some repeated computations
+
+* There were some errors in the code (spaths.py) related to the ordering of eigenvalues (now fixed). In principle, this could have resulted in errors in the computation, but with the specific library versions that were used, the library calls to compute the eigenvalues resulted in an ordering did not affect the outcome. The corrected version should also work if the specific algorithm for eigenvalue computation is changed, although we haven't tested this.

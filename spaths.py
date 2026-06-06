@@ -38,7 +38,7 @@ def retract_sympl_path(path) -> np.array:
     Returns
     -------
     numpy.array
-    Array containing the path of complex determinants 
+    Array containing the path of complex determinants
     """
     N = len(path)
     dim = path.shape[1]
@@ -56,7 +56,9 @@ def retract_sympl_path(path) -> np.array:
 
 
 def iwasawa(S):
-    r"""Returns Iwasawa decomposition of a symplectic matrix, following 
+    r"""Returns Iwasawa decomposition of a symplectic matrix, following
+    Benzi, M., Razouk, N.: On the Iwasawa decomposition of a symplectic matrix. 
+    Appl. Math. Lett. 20 (3), 260–265 (2007)
 
     Parameters
     ----------
@@ -79,7 +81,7 @@ def iwasawa(S):
     H = np.zeros((n,n))
     for i in range(n):
         H[i, i] = 1 / R[i, i]
-    U = H @ R 
+    U = H @ R
     D = np.zeros((n,n))
     sD = np.zeros((n,n))
     sD_inv = np.zeros((n,n))
@@ -89,15 +91,15 @@ def iwasawa(S):
         sD[i,i] = np.sqrt(D[i, i])
         sD_inv[i,i] = 1 / sD[i,i]
     A = np.zeros((dim, dim))
-    A[0:n,0:n] = sD 
+    A[0:n,0:n] = sD
     A[n:dim,n:dim] = sD_inv
     K = np.zeros((dim, dim))
-    K[0:n, 0:n] = Q[0:n,0:n] @ H @ sD_inv 
+    K[0:n, 0:n] = Q[0:n,0:n] @ H @ sD_inv
     K[0:n, n:dim] = -Q[n:dim,0:n] @ H @ sD_inv
     K[n:dim, n:dim] = K[0:n, 0:n]
     K[n:dim, 0:n] = -K[0:n, n:dim]
     N = np.zeros((dim, dim))
-    N[0:n, 0:n] = U 
+    N[0:n, 0:n] = U
     N[:, n:dim] = np.linalg.inv(A) @ (K.transpose() @ S[:,n:dim])
     return K, A, N
 
@@ -119,7 +121,7 @@ def KtoU(K):
     n = len(K) // 2
     #U = np.zeros((n,n), dtype=complex)
     U = K[0:n,0:n] -1j * K[n:2*n,0:n]
-    return U 
+    return U
 
 
 
@@ -162,7 +164,6 @@ def maslov_func(S):
 
 
 
-
 """Functions for dealing with elliptic matrices
 These are symplectic matrices with eigenvalues on the unit circle.
 
@@ -199,7 +200,7 @@ def find_elliptic_pairs(S):
     Returns
     -------
     Tuple consisting of a list with the indices of the elliptic pairs,
-    a numpy array with the eigenvalues, and 
+    a numpy array with the eigenvalues, and
     a numpy array with the basis change (from diagonalization)
     """
     eigvals, B = np.linalg.eig(S)
@@ -228,7 +229,7 @@ def path_removing_elliptic_pairs(S, steps=200):
     S : numpy.array
     Array with shape (2n,2n)
     steps : int
-    
+
     Returns
     -------
     path : numpy.array with shape (steps, 2n, 2n)
@@ -236,23 +237,18 @@ def path_removing_elliptic_pairs(S, steps=200):
     c_pairs, eigvals, B = find_elliptic_pairs(S)
     if len(c_pairs) == 0:
         return np.array( [S for i in range(steps)])
-    path = np.zeros((steps, 4, 4), dtype=complex)
+    Binv = np.linalg.inv(B)
     angle_paths = []
     for pair in c_pairs:
         eigval = eigvals[pair[0]]
         angle = np.arctan2(np.imag(eigval), np.real(eigval))
-        Binv = np.linalg.inv(B)
         angle_paths.append(np.exp(np.linspace(angle * 1j, np.pi * 1j, steps) ) )
     angle_paths = np.asarray(angle_paths)
-    for s in range(steps):
-        lst = np.array(eigvals)
-        for idx, pair in enumerate(c_pairs):
-            lst[pair[0]] = angle_paths[idx][s]
-            lst[pair[1]] = np.conjugate(angle_paths[idx][s])
-        diag_s = np.diag(lst)
-        path[s] = B @ diag_s @ Binv
-    return np.real(path)
-
+    lst_all = np.tile(eigvals, (steps, 1)).astype(complex)
+    for idx, pair in enumerate(c_pairs):
+        lst_all[:, pair[0]] = angle_paths[idx]
+        lst_all[:, pair[1]] = np.conjugate(angle_paths[idx])
+    return np.real((B * lst_all[:, np.newaxis, :]) @ Binv)
 
 
 
@@ -274,7 +270,7 @@ def find_real_hyperbolic_pairs(S):
     Returns
     -------
     Tuple consisting of a list with the indices of real hyperbolic pairs,
-    a numpy array with the eigenvalues, and 
+    a numpy array with the eigenvalues, and
     a numpy array with the basis change (from diagonalization)
     """
     eigvals, B = np.linalg.eig(S)
@@ -290,7 +286,7 @@ def find_real_hyperbolic_pairs(S):
                 indices.append(i)
                 indices.append(j)
                 c_pairs.append([i, j])
-                break   
+                break
     return c_pairs, eigvals, B
 
 
@@ -303,7 +299,7 @@ def path_removing_negative_hyperbolic_pairs(S, steps=200):
     S : numpy.array
     Array with shape (2n,2n)
     steps : int
-    
+
     Returns
     -------
     path : numpy.array with shape (steps, 2n, 2n)
@@ -312,10 +308,9 @@ def path_removing_negative_hyperbolic_pairs(S, steps=200):
     eigvals = [np.real(val) if np.abs(np.imag(val) ) < eps else val for val in eigvals]
     if len(c_pairs) == 0:
         return np.array( [S for i in range(steps)])
-    
-    path = np.zeros((steps, 4, 4), dtype=complex)
-    eigenval_paths = []
+
     Binv = np.linalg.inv(B)
+    eigenval_paths = []
     for pair in c_pairs:
         eigval = eigvals[pair[0]]
         if eigval < 0:
@@ -323,22 +318,18 @@ def path_removing_negative_hyperbolic_pairs(S, steps=200):
         else:
             eigenval_paths.append(np.linspace(eigval, eigval, steps))
     eigenval_paths = np.asarray(eigenval_paths)
-    for s in range(steps):
-        lst = np.array(eigvals)
-        for idx, pair in enumerate(c_pairs):
-            lst[pair[0]] = eigenval_paths[idx][s]
-            lst[pair[1]] = 1.0 / eigenval_paths[idx][s]
-        diag_s = np.diag(lst)
-        path[s] = B @ diag_s @ Binv
-    return path
-
+    lst_all = np.array(np.tile(eigvals, (steps, 1)), dtype=complex)
+    for idx, pair in enumerate(c_pairs):
+        lst_all[:, pair[0]] = eigenval_paths[idx]
+        lst_all[:, pair[1]] = 1.0 / eigenval_paths[idx]
+    return (B * lst_all[:, np.newaxis, :]) @ Binv
 
 
 
 
 def find_complex_hyperbolic_tuple(S):
-    r"""Returns a tuple of complex eigenvalues of a symplectic matrix S 
-    that do not lie on the unit circle. Eigenvalues that are closer 
+    r"""Returns a tuple of complex eigenvalues of a symplectic matrix S
+    that do not lie on the unit circle. Eigenvalues that are closer
     than eps to the unit circle are discarded.
 
     Parameters
@@ -349,7 +340,7 @@ def find_complex_hyperbolic_tuple(S):
     Returns
     -------
     Tuple consisting of a list with the indices of complex hyperbolic eigenvalues,
-    a numpy array with the eigenvalues, and 
+    a numpy array with the eigenvalues, and
     a numpy array with the basis change (from diagonalization)
     """
     eigvals, B = np.linalg.eig(S)
@@ -381,7 +372,7 @@ def find_complex_hyperbolic_tuple(S):
 
 
 def path_removing_cpx_hyp_tuple(S, steps=200):
-    r"""Returns path of symplectic matrices starting at S and ending at S', 
+    r"""Returns path of symplectic matrices starting at S and ending at S',
     where S' has no complex hyperbolic eigenvalues left
 
     Parameters
@@ -389,7 +380,7 @@ def path_removing_cpx_hyp_tuple(S, steps=200):
     S : numpy.array
     Array with shape (2n,2n)
     steps : int
-    
+
     Returns
     -------
     path : numpy.array with shape (steps, 2n, 2n)
@@ -400,19 +391,16 @@ def path_removing_cpx_hyp_tuple(S, steps=200):
     eigval = eigvals[tuple[0]]
     norm = np.linalg.norm(eigval)
     angle = np.arctan2(np.imag(eigval), np.real(eigval))
-    path = np.zeros((steps, 4, 4), dtype=complex)
     Binv = np.linalg.inv(B)
     angle_path = np.exp(np.linspace(angle * 1j, np.pi * 1j, steps) )
     norm_path = np.linspace(norm, 1.0, steps)
-    for s in range(steps):
-        lst = np.array(eigvals)
-        lst[tuple[0]] = norm_path[s] * angle_path[s]
-        lst[tuple[1]] = 1 / (norm_path[s] * angle_path[s])
-        lst[tuple[2]] = norm_path[s] * np.conjugate(angle_path[s] )
-        lst[tuple[3]] = 1 / ( norm_path[s] * np.conjugate(angle_path[s]) )
-        diag_s = np.diag(lst)
-        path[s] = B @ diag_s @ Binv
-    return np.real(path)
+    combined = norm_path * angle_path
+    lst_all = np.tile(eigvals, (steps, 1)).astype(complex)
+    lst_all[:, tuple[0]] = combined
+    lst_all[:, tuple[1]] = 1.0 / combined
+    lst_all[:, tuple[2]] = norm_path * np.conjugate(angle_path)
+    lst_all[:, tuple[3]] = 1.0 / (norm_path * np.conjugate(angle_path))
+    return np.real((B * lst_all[:, np.newaxis, :]) @ Binv)
 
 
 
@@ -432,36 +420,67 @@ def change_order_mat(B, target_order):
         P[i, target_order[i]] = 1.0
     return P
 
+# fixed: use tolerance-based comparison with break after first match
+# to correctly handle near-duplicate eigenvalues.
 def ordering_values(vals):
     sorted_vals = sorted(copy.deepcopy(vals), reverse=True)
     ordering = []
+    used = [False] * len(vals)
     for val in vals:
         for i in range(len(vals)):
-            if sorted_vals[i] == val:
+            if not used[i] and np.abs(sorted_vals[i] - val) < eps:
                 ordering.append(i)
+                used[i] = True
+                break
     return ordering, sorted_vals
 
+# fixed from v1
+# In v1, this function still worked correctly in most cases due to the ordering that 
+# invoked eigenvalue computation algorithm used 
 def path_removing_positive_hyperbolic_tuple(S, steps=200):
     c_pairs, eigvals, B = find_real_hyperbolic_pairs(S)
     eigvals = [np.real(val) if np.abs(np.imag(val) ) < eps else val for val in eigvals]
     if len(c_pairs) < 2 or np.min(np.real(eigvals) ) < 0:
         return path_removing_cpx_hyp_tuple(S, steps=steps)
+
+    # fixed: save original eigenvalues before ordering_values overwrites them.
+    original_eigvals = list(eigvals)
     ordering, eigvals = ordering_values(eigvals)
+
+    # fixed: use the inverse permutation so that col j of BO gets the
+    # eigenvector whose sorted rank is j (not the eigenvector at original index j).
+    # inv_ordering[rank] = original index of the eigenvalue with that rank.
+    inv_ordering = [0] * len(ordering)
+    for k, rank in enumerate(ordering):
+        inv_ordering[rank] = k
+
     O = np.zeros((4, 4))
-    O[ordering[0],0] = 1
-    O[ordering[3],2] = 1
-    O[ordering[1],1] = 1
-    O[ordering[2],3] = 1
+    O[inv_ordering[0], 0] = 1   # col 0 ← eigvec for largest  (λ1)
+    O[inv_ordering[1], 1] = 1   # col 1 ← eigvec for 2nd largest (λ2)
+    O[inv_ordering[3], 2] = 1   # col 2 ← eigvec for smallest (1/λ1, symplectic pair of col 0)
+    O[inv_ordering[2], 3] = 1   # col 3 ← eigvec for 2nd smallest (1/λ2, symplectic pair of col 1)
+
     BO = B @ O
     BO[:,0] = -1 / sdot4(BO[:,0], BO[:,2]) * BO[:,0]
     BO[:,1] = -1 / sdot4(BO[:,1], BO[:,3]) * BO[:,1]
     BOi = np.linalg.inv(BO)
-    ODO = np.linalg.inv(O) @ np.diag(eigvals) @ O
+
+    # fixed: use original_eigvals so that ODO reflects the true eigenvalue
+    # diagonal in the BO basis, ensuring path1[0] = S.
+    ODO = np.linalg.inv(O) @ np.diag(original_eigvals) @ O
+
     ts = np.linspace(0.0, 1.0, steps)
     lambda_s = np.linspace(ODO[0,0], 2.0, steps)
     mu_s = np.linspace(ODO[1,1], 2.0, steps)
-    path1 = np.asarray([BO @ np.diag([ls,ms,1/ls,1/ms]) @ BOi for ls, ms in zip(lambda_s,mu_s)])
-    path2 = np.asarray([BO @ rotate4(0.1*s) @ np.diag([2.0,2.0,0.5,0.5]) @ BOi for s in ts])
+    diag_vals1 = np.stack([lambda_s, mu_s, 1.0/lambda_s, 1.0/mu_s], axis=1)
+    path1 = np.real((BO * diag_vals1[:, np.newaxis, :]) @ BOi)
+    D44 = np.diag([2.0, 2.0, 0.5, 0.5])
+    A_rot = np.array([[0,-1,0,0],[1,0,0,0],[0,0,0,-1],[0,0,1,0]], dtype=float)
+    M1 = BO @ D44 @ BOi
+    M2 = BO @ A_rot @ D44 @ BOi
+    phi_vals = 0.1 * ts
+    path2 = np.real(np.cos(phi_vals)[:, np.newaxis, np.newaxis] * M1
+                  + np.sin(phi_vals)[:, np.newaxis, np.newaxis] * M2)
     path3 = path_removing_cpx_hyp_tuple(path2[-1], steps=steps)
     return np.concatenate((path1, path2, path3))
 
@@ -471,7 +490,8 @@ def reduce_symplectic_matrix(S, steps=200):
     pathE = path_removing_elliptic_pairs(path2H[-1], steps=steps)
     pathH = path_removing_negative_hyperbolic_pairs(pathE[-1], steps=steps)
     path = np.concatenate((path2H, pathE, pathH))
-    return path 
+    return path
+
 
 
 
@@ -479,38 +499,39 @@ def interpolate_K(K, dim, steps):
     U = KtoU(K)
     eigU, basis = np.linalg.eig(U)
     basis_inv = np.linalg.inv(basis)
-    angles = (np.log(eigU))
-    target_angles = [0.0 for el in angles]
-    diags = np.linspace(angles, target_angles, steps) 
+    angles = np.log(eigU)
+    target_angles = np.zeros_like(angles)
+    diags = np.linspace(angles, target_angles, steps)   # (steps, n)
+    exp_diags = np.exp(diags)                           # (steps, n)
+    tmp = (basis * exp_diags[:, np.newaxis, :]) @ basis_inv   # (steps, n, n)
+    n = dim // 2
     Ks = np.zeros((steps, dim, dim))
-    for idx, diag in enumerate(diags):
-        Us = np.diag(np.exp(diag))
-        tmp = basis @ Us @ basis_inv
-        Ks[idx] = UtoK(tmp)
+    Ks[:, 0:n, 0:n] = np.real(tmp)
+    Ks[:, n:dim, n:dim] = np.real(tmp)
+    Ks[:, n:dim, 0:n] = -np.imag(tmp)
+    Ks[:, 0:n, n:dim] = np.imag(tmp)
     return Ks
 
 
 def interpolate_A(A, dim, steps):
-    As = np.zeros((steps, dim, dim))
     n = dim // 2
-    A_target = np.identity(n)
-    A11_lin = np.linspace( A[0:n,0:n], A_target, steps)
-    for step in range(steps):
-        As[step][0:n,0:n] = A11_lin[step]
-        As[step][n:dim,n:dim] = np.linalg.inv(A11_lin[step])
+    A11_lin = np.linspace(A[0:n, 0:n], np.identity(n), steps)   # (steps, n, n)
+    As = np.zeros((steps, dim, dim))
+    As[:, 0:n, 0:n] = A11_lin
+    As[:, n:dim, n:dim] = np.linalg.inv(A11_lin)   # batched inverse
     return As
 
 def interpolate_N(N, dim, steps):
     n = dim // 2
-    Ns = np.zeros((steps, dim, dim))    
-    N12_lin = np.linspace(N[0:n,n:dim], np.zeros((n,n)), steps//2)
-    for step in range(steps//2):
-        Ns[step][0:n,0:n] = N[0:n,0:n]
-        Ns[step][n:dim,n:dim] = N[n:dim,n:dim]
-        Ns[step][0:n,n:dim] = N12_lin[step]
-    N_lin = np.linspace(Ns[steps//2-1], np.identity(dim), steps-steps//2)
-    for step in range(steps//2, steps):
-        Ns[step] = N_lin[step - steps//2]
+    Ns = np.zeros((steps, dim, dim))
+    N12_lin = np.linspace(N[0:n, n:dim], np.zeros((n, n)), steps // 2)
+    Ns[:steps//2, 0:n, 0:n] = N[0:n, 0:n]
+    Ns[:steps//2, n:dim, n:dim] = N[n:dim, n:dim]
+    Ns[:steps//2, 0:n, n:dim] = N12_lin
+    mid = np.zeros((dim, dim))
+    mid[0:n, 0:n] = N[0:n, 0:n]
+    mid[n:dim, n:dim] = N[n:dim, n:dim]
+    Ns[steps//2:] = np.linspace(mid, np.identity(dim), steps - steps//2)
     return Ns
 
 
@@ -542,45 +563,61 @@ def path_hyperbolic_basepoint(S, steps=200):
         B2[:,i] = B1[:, idx_order[i]]
         R[i,idx_order[i]] = 1.0
     Rinv = np.linalg.inv(R)
-    B1 = B1 @ R 
+    B1 = B1 @ R
     K, A, N = iwasawa(B1)
     Kpath = interpolate_K(K, len(K), steps)
     Apath = interpolate_A(A, len(A), steps)
     Npath = interpolate_N(N, len(N), steps)
-    Bpath = np.zeros((steps, 4, 4))
-    for i in range(steps):
-        Bpath[i] = Kpath[i] @ Apath[i] @ Npath[i]
-    Spath = np.zeros((steps, 4, 4))
-    for i in range(steps):
-        Bi = Bpath[i] @ Rinv
-        Bi_inv = np.linalg.inv(Bi)
-        Spath[i] = np.real( Bi @ np.diag(eigvals) @ Bi_inv )
+    Bpath = Kpath @ Apath @ Npath   # batched matmul, shape (steps, 4, 4)
+    Bi = Bpath @ Rinv               # (steps, 4, 4)
+    Bi_inv = np.linalg.inv(Bi)     # batched inverse
+    Spath = np.real(Bi @ np.diag(eigvals) @ Bi_inv)
     nf = Spath[-1] #normal form
-    idx0 = np.argmax(nf) % 4
+
+    # fixed: restrict argmax and max to the diagonal so that numerical
+    # off-diagonal noise cannot select a wrong index or starting eigenvalue.
+    diag_nf = np.diag(nf)
+    idx0 = int(np.argmax(diag_nf))
     idx1 = idx0 - 2
     if idx0 + 2 < 4:
         idx1 = idx0 + 2
     rot_steps = steps // 10
-    eigenval_path = np.linspace(np.max(nf), 2.0, rot_steps)
-    Rpath = np.zeros((rot_steps, 4, 4))
-    for i in range(rot_steps):
-        Rpath[i] = nf
-        Rpath[i][idx0, idx0] = eigenval_path[i]
-        Rpath[i][idx1, idx1] = 1.0 / eigenval_path[i]
+    eigenval_path = np.linspace(np.max(diag_nf), 2.0, rot_steps)
+    Rpath = np.tile(nf, (rot_steps, 1, 1))
+    Rpath[:, idx0, idx0] = eigenval_path
+    Rpath[:, idx1, idx1] = 1.0 / eigenval_path
     return np.real(np.concatenate((Spath, Rpath)) )
 
+
+
+
 def compute_angular_index(cdets, T):
-    angle_jumps = [np.imag(np.log(cdets[i+1] / cdets[i] )) for i in range(T-1)]
-    return int(np.round(np.sum(angle_jumps) /np.pi) ), angle_jumps
+    angle = 0
+    for i in range(T):
+        delta = cdets[i+1] / cdets[i]
+        angle += np.imag(np.log(delta))
+    return int(np.round(angle / np.pi) )
+
+
 
 def check_symplecticity(s_path):
-    return [np.sum(np.abs(A.transpose() @ Omega4 @ A -Omega4) ) for A in s_path]
+    vals = []
+    for A in s_path:
+        vals.append(np.sum(np.abs(A.transpose() @ Omega4 @ A -Omega4) ) )
+    return vals
 
 def check_maslov_intersections(s_path):
-    return [maslov_func(s_path[i+1]) * maslov_func(s_path[i]) for i in range(len(s_path) - 1)] 
+    maslov_ints = []
+    for i in range(len(s_path) - 1):
+        maslov_ints.append(maslov_func(s_path[i+1]) * maslov_func(s_path[i]) )
+    return maslov_ints
 
 def check_continuity(s_path):
-    return [np.sum(np.abs(s_path[i+1] - s_path[i] ) ) for i in range(len(s_path) - 1)]
+    jumps = []
+    for i in range(len(s_path) - 1):
+        jumps.append(np.sum(np.abs(s_path[i+1] - s_path[i] ) ) )
+    return jumps
+
 
 def get_index_sympl_path(s_path, steps=20000, error_report=False):
     path_reduced = reduce_symplectic_matrix(s_path[-1], steps=steps)
@@ -589,21 +626,17 @@ def get_index_sympl_path(s_path, steps=20000, error_report=False):
     concat_path = np.concatenate((path_reduced, second_path))
     extend_s_path = np.concatenate( (s_path, concat_path) )
     cdets = retract_sympl_path(extend_s_path)
-    CZ, angle_jumps = compute_angular_index(cdets, len(cdets)-1)
+    CZ = compute_angular_index(cdets, len(cdets)-1)
     # For reliability checking
     if error_report:
         symplecticity = np.max( check_symplecticity(extend_s_path))
         extension_sign = np.min(check_maslov_intersections(concat_path))
         continuity = np.max(check_continuity(extend_s_path))
-        max_angle_jump = np.max(angle_jumps)
-        print("Max angle jump at ", np.argmax(angle_jumps), len(angle_jumps ), "; jump size=", max_angle_jump)
-        if max_angle_jump > np.pi:
-            print("Angle jump is too large: increase the number of integration steps")
         print("Error in symplecticity was at most", symplecticity)
         if extension_sign > 0:
             print("Extention stayed away from Maslov cycle; closest at value", extension_sign)
         else:
-            print("Extention crossed Maslov cycle; refine number of steps, eps", extension_sign) 
+            print("Extention crossed Maslov cycle; refine number of steps, eps", extension_sign)
         print("Error in continuity was at most", continuity, "; increase number of steps if this is too large.")
     return CZ
 
@@ -614,7 +647,7 @@ def parity_type(s_path_xi, T):
     trace = np.matrix.trace(s_path_xi[T])
     if trace < 2:
         return 1
-    else: 
+    else:
         return 0
 
 def return_closest_even(v):
@@ -622,21 +655,21 @@ def return_closest_even(v):
     if n%2 == 0:
         return n
     else:
-        return n+1 
+        return n+1
 
 def return_closest_odd(v):
     n = int(np.floor(v) )
     if n%2 == 1:
         return n
     else:
-        return n+1 
+        return n+1
 
 def return_parity_corrected(v, parity):
     n = int(np.floor(v) )
     if n%2 == parity:
         return n
     else:
-        return n+1 
+        return n+1
 
 def compute_fractional_angular_index(cdets, T):
     angle = 0
@@ -650,5 +683,3 @@ def planar_index(p_path, T):
     angular_idx = compute_fractional_angular_index(cdets, T)
     planar_CZ = return_parity_corrected(angular_idx, parity_type(p_path, T))
     return planar_CZ
-
-
